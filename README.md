@@ -18,7 +18,53 @@ Para ejecutar este proyecto en un entorno local, sigue estos pasos:
 ### 1. Clonar el repositorio
 
 git clone [https://github.com/miketo-developer/edutareas-pwa.git](https://github.com/miketo-developer/edutareas-pwa.git)
+```bash
 cd edutareas
+```
+
+### 2. Instalar dependencias
+```bash
+npm install
+```
+
+### 3. Configurar variables de entorno (Firebase)
+
+Por razones de seguridad, las credenciales de Firebase han sido omitidas del repositorio.
+
+Dirígete a src/environments/.
+
+Renombra el archivo environment.template.ts a environment.ts.
+
+Completa los campos con tus credenciales obtenidas desde la Consola de Firebase.
+
+TypeScript
+
+// Ejemplo de estructura en environment.ts
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: "TU_API_KEY",
+    authDomain: "tu-proyecto.firebaseapp.com",
+    projectId: "tu-proyecto",
+    // ... rest of config
+  }
+};
+
+### 4. Ejecutar servidor de desarrollo
+```bash
+ng serve
+```
+
+La aplicación estará disponible en http://localhost:4200/.
+
+📂 Estructura del Proyecto
+src/app/core: Servicios globales, guardias y configuración de Firebase.
+src/app/shared: Componentes reutilizables (Botones, Cards, Navbar).
+src/app/features: Módulos de funcionalidad (Login, Muro de tareas, Perfil).
+src/environments: Configuración de variables según el entorno.
+
+📄 Licencia
+Este proyecto fue desarrollado con fines académicos para el proceso de estadías profesionales.
 
 
 
