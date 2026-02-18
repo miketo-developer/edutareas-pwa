@@ -1,4 +1,33 @@
-# Edutareas
+# EduTareas PWA - Gestión Escolar 🎓
+
+Esta es una **Progressive Web App (PWA)** diseñada para optimizar la asignación y seguimiento de tareas en niveles de educación secundaria. El proyecto forma parte del entregable de estadías profesionales, enfocado en crear una solución técnica escalable, rápida y funcional.
+
+## 🚀 Tecnologías Utilizadas
+
+* **Framework:** [Angular 19](https://angular.dev/) (Standalone Components)
+* **Backend as a Service:** [Firebase](https://firebase.google.com/)
+    * **Authentication:** Gestión de acceso para docentes y alumnos.
+    * **Cloud Firestore:** Base de datos NoSQL en tiempo real para tareas.
+* **Estilos:** SCSS (Sass) siguiendo lineamientos de **Material Design 3**.
+* **Control de Versiones:** Git & GitHub.
+
+## 🛠️ Configuración del Proyecto
+
+Para ejecutar este proyecto en un entorno local, sigue estos pasos:
+
+### 1. Clonar el repositorio
+
+git clone [https://github.com/miketo-developer/edutareas-pwa.git](https://github.com/miketo-developer/edutareas-pwa.git)
+cd edutareas
+
+
+
+
+
+
+
+
+
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
 
