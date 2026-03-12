@@ -1,0 +1,65 @@
+.muro-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding-bottom: 20px;
+
+  .navbar {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    h1 { font-size: 1.2rem; margin: 0; }
+    .icons { display: flex; gap: 15px; font-size: 1.2rem; cursor: pointer; }
+  }
+
+  .hero-banner {
+    background: linear-gradient(135deg, #2e7d32, #4caf50); // Verde motivador
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+
+    h2 { margin: 0; font-size: 1.5rem; }
+    p { margin: 5px 0; opacity: 0.9; }
+  }
+
+  .content {
+    padding: 20px;
+    text-align: center;
+
+    .badge {
+      display: inline-block;
+      background: #e3f2fd;
+      color: var(--color-primary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .main-illustration {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+
+      img { width: 100%; max-width: 250px; border-radius: 15px; }
+      h3 { color: #2e7d32; margin: 15px 0 5px; }
+      p { color: #555; font-size: 0.9rem; }
+    }
+
+    .advice-card {
+      margin-top: 20px;
+      background: #f1f8e9; // Verde muy claro
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #c8e6c9;
+      color: #33691e;
+      font-size: 0.85rem;
+    }
+  }
+}
+

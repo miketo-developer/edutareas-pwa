@@ -1,0 +1,87 @@
+.muro-container.maestro {
+  background-color: #f5f7fa;
+  min-height: 100vh;
+
+  .navbar-teacher {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 20px 20px;
+
+    .user-info {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      .avatar { font-size: 32px; background: rgba(255,255,255,0.2); padding: 8px; border-radius: 50%; }
+      h1 { font-size: 18px; margin: 0; }
+      p { font-size: 12px; margin: 0; opacity: 0.8; }
+    }
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 20px;
+    margin-top: -10px; // Elevación sobre el navbar
+
+    .stat-card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      text-align: center;
+      .value { display: block; font-size: 24px; font-weight: bold; color: var(--color-primary); }
+      .label { font-size: 12px; color: #666; }
+
+      &.alert .value { color: #e74c3c; } // Rojo para pendientes urgentes
+    }
+  }
+
+  .content {
+    padding: 0 20px;
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      h3 { font-size: 16px; color: #333; }
+      .btn-add {
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+      }
+    }
+
+    .group-item.card {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 5px solid var(--color-primary);
+
+      h4 { margin: 0; font-size: 15px; }
+      p { margin: 4px 0 0; font-size: 12px; color: #888; }
+      .arrow { color: var(--color-primary); font-weight: bold; }
+    }
+  }
+
+  .teacher-tip {
+    background: #eef2ff;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 20px;
+    border: 1px dashed var(--color-primary);
+    p { font-size: 13px; color: #444; margin: 0; }
+  }
+}

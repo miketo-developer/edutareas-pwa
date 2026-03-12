@@ -1,0 +1,56 @@
+<div class="muro-container maestro">
+  <header class="navbar-teacher">
+    <div class="user-info">
+      <span class="avatar">👨‍🏫</span>
+      <div>
+        <h1>Panel Docente</h1>
+        <p>Prof. {{ nombreUsuario }}</p>
+      </div>
+    </div>
+    <div class="icons">
+      <button class="btn-icon">📊</button>
+      <button class="btn-icon" (click)="logout()">🚪</button>
+    </div>
+  </header>
+
+  <section class="dashboard-grid">
+    <div class="stat-card">
+      <span class="value">12</span>
+      <span class="label">Entregas nuevas</span>
+    </div>
+    <div class="stat-card alert">
+      <span class="value">3</span>
+      <span class="label">Tareas vencidas</span>
+    </div>
+  </section>
+
+  <div class="content">
+    <div class="section-header">
+      <h3>Mis Grupos</h3>
+      <button class="btn-add">+ Crear Tarea</button>
+    </div>
+
+    <div class="groups-list">
+      <div class="group-item card">
+        <div class="group-info">
+          <h4>3º Secundaria - Grupo B</h4>
+          <p>28 Alumnos • 5 Tareas activas</p>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="group-item card">
+        <div class="group-info">
+          <h4>2º Secundaria - Grupo A</h4>
+          <p>32 Alumnos • 2 Tareas activas</p>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+
+    <div class="teacher-tip">
+      <p>💡 <strong>Tip de gestión:</strong></p>
+      <p>Recuerda que puedes programar tareas para que se publiquen automáticamente el lunes a las 8:00 AM.</p>
+    </div>
+  </div>
+</div>

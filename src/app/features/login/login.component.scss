@@ -1,0 +1,184 @@
+// src/app/features/login/login.component.scss
+// --- Enfoque Mobile-First (Justificación Técnica) ---
+// Se establecen estilos base optimizados para dispositivos móviles (viewport estrecho)
+// y se añaden Media Queries para responsividad en pantallas mayores.
+
+// Contenedor principal para centrar la tarjeta
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0; // Margen de seguridad en móviles
+  overflow: hidden;        // Corta cualquier desborde
+  background-color: var(--color-bg-outside);
+}
+
+// La tarjeta blanca del diseño
+.auth-card {
+  background-color: var(--color-bg-container);
+  border-radius: var(--border-radius-lg); // Material Design 3
+  padding: 40px var(--spacing-md); // Más padding vertical
+  width: 90%;
+  max-width: 380px; // Ancho máximo móvil
+  display: flex;
+  margin: auto;
+  box-sizing: border-box;
+  flex-direction: column;
+  //align-items: center; // Centra todos los elementos hijos horizontalmente
+  gap: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); // Sombra suave para elevación
+
+  // Encabezado del diseño
+  .header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px; // Separa el logo del texto "Bienvenido" de forma segura
+    text-align: center;
+
+    // Icono azul de birrete
+    .birrete-icon {
+      display: inline-flex; // Cambiado para centrar el emoji/icono por dentro
+      justify-content: center;
+      align-items: center;
+      width: 64px;
+      height: 64px;
+      background-color: var(--color-primary);
+      border-radius: 50%;
+      font-size: 32px;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      margin: 0;
+      line-height: 1.2; // Evita que las líneas se encimen
+    }
+  }
+
+  // Estilos para el formulario
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; // Espacio uniforme entre inputs
+
+    // Grupos de input (Label + Input)
+    .input-group {
+      width: 100%; // Asegura que ocupen todo el ancho disponible
+
+      label {
+        color: var(--color-text-label);
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: var(--spacing-xs);
+        padding-left: 4px; // Pequeño ajuste para alinear con el placeholder
+      }
+
+      // Contenedor para el input y el icono de ojo (Saber Hacer)
+      .input-wrapper {
+        width: 100%;
+
+        input {
+          width: 100%;
+          padding: 18px 16px; // Material padding grande
+          background-color: var(--color-input-bg);
+          border: 1px solid var(--color-input-border);
+          border-radius: var(--border-radius-md);
+          font-size: 16px;
+          color: var(--color-input-text);
+          transition: border-color 0.2s;
+
+          &::placeholder {
+            color: var(--color-input-placeholder);
+          }
+
+          &:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            border-width: 2px;
+            padding: 17px 15px; // Ajuste para que no "brinque" al cambiar el borde
+          }
+        }
+
+        // Icono de ojo para la contraseña (Saber Hacer)
+        .toggle-password {
+          position: absolute;
+          right: 16px;
+          background: none;
+          border: none;
+          color: var(--color-text-subtitle);
+          cursor: pointer;
+          font-size: 20px;
+          padding: 0;
+
+          &:hover {
+            color: var(--color-text-label);
+          }
+        }
+      }
+    }
+
+    // Enlaces de la interfaz
+    .link-action {
+      font-size: 14px;
+      color: var(--color-link);
+      text-decoration: none;
+      align-self: flex-end; // Alinea a la derecha (¿Olvidaste tu contraseña?)
+      margin-top: calc(var(--spacing-xs) * -1); // Pequeño ajuste para subirlo
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    // Botón Iniciar Sesión (Material Design 3)
+    .submit-btn {
+      background-color: var(--color-primary);
+      color: var(--color-text-on-primary);
+      border: none;
+      border-radius: var(--border-radius-pill); // Pill shape
+      padding: 18px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, box-shadow 0.2s;
+      margin-top: var(--spacing-sm);
+
+      &:hover {
+        background-color: var(--color-primary-dark);
+      }
+
+      &:disabled {
+        background-color: var(--color-input-border);
+        color: var(--color-input-placeholder);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // Texto final de "¿No tienes una cuenta?"
+  .footer-text {
+    margin-top: var(--spacing-xl);
+    font-size: 14px;
+    color: var(--color-text-subtitle);
+    text-align: center;
+
+    .link-action {
+      align-self: auto; // Restablece la alineación
+      display: inline; // Para que el enlace esté en la misma línea
+    }
+  }
+}
+
+// Media Query para Tablets y Escritorios (Justificación Técnica - Responsividad)
+@media (min-width: 768px) {
+  .auth-card {
+    max-width: 400px; // Un poco más ancha para evitar que los inputs sean muy largos
+    padding: var(--spacing-xl); // Mayor padding
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); // Sombra más pronunciada en escritorio
+  }
+}
+
+
+

@@ -1,0 +1,42 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="header-section">
+      <h2>Crea tu cuenta</h2>
+      <p>Únete a la plataforma educativa</p>
+    </div>
+
+    <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <div class="input-group">
+        <label>Nombre Completo</label>
+        <input type="text" formControlName="nombre" placeholder="Ej. Juan Pérez">
+      </div>
+
+      <div class="input-group">
+        <label>Correo Electrónico</label>
+        <input type="email" formControlName="email" placeholder="usuario@escuela.com">
+      </div>
+
+      <div class="input-group">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" placeholder="Mínimo 6 caracteres">
+      </div>
+
+      <div class="input-group">
+        <label>¿Quién eres?</label>
+        <select formControlName="role">
+          <option value="alumno">Soy Alumno</option>
+          <option value="maestro">Soy Maestro</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">
+        Crear Cuenta
+      </button>
+    </form>
+
+    <p class="footer-text">
+      ¿Ya tienes cuenta? <a href="/login">Inicia Sesión</a>
+    </p>
+  </div>
+</div>

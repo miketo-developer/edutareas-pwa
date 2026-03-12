@@ -1,1 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
+// src/styles.scss
+// --- Definición de Variables (Justificación Técnica) ---
+// Se utilizan variables SCSS para centralizar la paleta de colores (Material Design 3)
+// y garantizar la consistencia visual, facilitando un futuro "Modo Oscuro".
+
+:root {
+  // Colores Primarios
+  --color-primary: #1877F2; // Azul de tu botón (ajustado para accesibilidad)
+  --color-primary-dark: #0F62CC;
+  --color-text-on-primary: #FFFFFF;
+
+  // Fondo y Textos
+  --color-bg-container: #FFFFFF; // Fondo blanco de la tarjeta
+  --color-bg-outside: #1F1F1F;   // Fondo gris oscuro del exterior
+
+  --color-text-title: #000000;    // Bienvenido/a
+  --color-text-subtitle: #757575; // Inicia sesión
+  --color-text-label: #424242;    // Correo Electrónico
+
+  // Inputs y Bordes
+  --color-input-border: #E0E0E0;
+  --color-input-bg: #FFFFFF;
+  --color-input-text: #000000;
+  --color-input-placeholder: #BDBDBD;
+
+  // Enlaces
+  --color-link: #1877F2;
+
+  // Espaciado y Radio
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-pill: 50px; // Para el botón
+
+  // Tipografía
+  --font-family: 'Roboto', sans-serif; // O la que prefieras de Google Fonts
+}
+
+// Estilos base para el cuerpo
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--color-bg-outside); // Simula la pantalla oscura exterior
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box; // Vital: el padding no suma al ancho total
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  overflow-x: hidden; // Evita el scroll horizontal
+}
