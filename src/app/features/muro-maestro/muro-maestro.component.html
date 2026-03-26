@@ -27,7 +27,7 @@
   <div class="content">
     <div class="section-header">
       <h3>Mis Grupos</h3>
-      <button class="btn-add">+ Crear Tarea</button>
+      <button class="btn-add" (click)="abrirFormulario()">+ Crear Tarea</button>
     </div>
 
     <div class="groups-list">
@@ -37,6 +37,23 @@
           <p>28 Alumnos • 5 Tareas activas</p>
         </div>
         <span class="arrow">→</span>
+      </div>
+
+      <div class="tasks-section">
+        <h3>Tareas Publicadas</h3>
+        <div class="feed">
+          <div *ngFor="let tarea of tareas" class="task-card">
+            <div class="task-content">
+              <h4>{{ tarea.titulo }}</h4>
+              <p>{{ tarea.descripcion }}</p>
+              <small>📅 Entrega: {{ tarea.fechaEntrega | date:'shortDate' }} | 👥 Grupo: {{ tarea.grupoId }}</small>
+            </div>
+            <div class="task-actions">
+              <button (click)="editarTarea(tarea)" class="btn-edit">✏️</button>
+              <button (click)="eliminarTarea(tarea.id!)" class="btn-delete">🗑️</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="group-item card">
@@ -53,4 +70,10 @@
       <p>Recuerda que puedes programar tareas para que se publiquen automáticamente el lunes a las 8:00 AM.</p>
     </div>
   </div>
+
+  <app-task-form
+    *ngIf="mostrarFormulario"
+    [tarea]="tareaSeleccionada"
+    (tareaGuardada)="cargarTareas(); mostrarFormulario=false">
+  </app-task-form>
 </div>

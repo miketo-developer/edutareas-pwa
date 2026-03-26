@@ -20,14 +20,15 @@ export class RegisterComponent {
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    role: ['alumno', [Validators.required]] // Valor por defecto
+    role: ['alumno', [Validators.required]], // Valor por defecto
+    grupoId: ['3A', Validators.required]
   });
 
   async onSubmit() {
     if (this.registerForm.valid) {
-      const { email, password, role, nombre } = this.registerForm.value;
+      const { email, password, role, nombre, grupoId } = this.registerForm.value;
       try {
-        await this.authService.register(email, password, role, nombre);
+        await this.authService.register(email, password, role, nombre, grupoId!); // el ! es para evitar recibir un null
         alert('Usuario registrado con éxito');
       } catch (error: any) {
         alert('Error al registrar: ' + error.message);

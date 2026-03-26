@@ -3,38 +3,94 @@ import { AuthService } from '../../core/services/auth.service';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 
+import { CommonModule } from '@angular/common';
+import { TaskService } from '../../core/services/task.service';
+import { Tarea } from '../../core/models/tarea.model';
+import { TaskFormComponent } from '../tareas/task-form/task-form.component';
+
 
 @Component({
   selector: 'app-muro-maestro',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, TaskFormComponent],
   templateUrl: './muro-maestro.component.html',
   styleUrl: './muro-maestro.component.scss'
 })
 export class MuroMaestroComponent implements OnInit {
+
   private auth = inject(Auth);
   private firestore = inject(Firestore);
   private authService = inject(AuthService);
+  private taskService = inject(TaskService);
 
-  // Definimos la variable para que no haya error
+  tareas: Tarea[] = [];
+  mostrarFormulario = false;
+  tareaSeleccionada?: Tarea; // Por si se va a editar una existente
+
   nombreUsuario: string = 'Cargando...';
 
   async ngOnInit() {
-    // Obtenemos el usuario autenticado actualmente
+    await this.cargarUsuario();
+    await this.cargarTareas();
+  }
+
+  async cargarUsuario() {
     const user = this.auth.currentUser;
 
     if (user) {
-      // Consultamos su documento en la colección 'users' usando su UID
       const userDoc = await getDoc(doc(this.firestore, `users/${user.uid}`));
-
       if (userDoc.exists()) {
-        const userData = userDoc.data();
-        this.nombreUsuario = userData['nombre'] || 'Profesor';
+        this.nombreUsuario = userDoc.data()['nombre'] || 'Profesor';
       }
     }
   }
 
+  async cargarTareas() {
+    this.tareas = await this.taskService.getMyTasks();
+  }
+
   logout() {
     this.authService.logout();
+  }
+
+  abrirFormulario() {
+    this.tareaSeleccionada = undefined;
+    this.mostrarFormulario = true;
+  }
+
+  editarTarea(tarea: Tarea) {
+    const user = this.auth.currentUser;
+
+    // VALIDACIÓN DE PROPIEDAD
+    if (tarea.docenteId !== user?.uid) {
+      alert('No puedes editar esta tarea');
+      return;
+    }
+
+    this.tareaSeleccionada = tarea;
+    this.mostrarFormulario = true;
+  }
+
+  async eliminarTarea(id: string) {
+    const tarea = this.tareas.find(t => t.id === id);
+    const user = this.auth.currentUser;
+
+    // VALIDACIÓN DE PROPIEDAD
+    if (!tarea || tarea.docenteId !== user?.uid) {
+      alert('No puedes eliminar esta tarea');
+      return;
+    }
+
+    const confirmacion = confirm('¿Eliminar esta tarea?');
+    if (!confirmacion) return;
+
+    await this.taskService.deleteTask(id);
+    await this.cargarTareas();
+  }
+
+  // PARA RECARGAR DESPUÉS DE GUARDAR
+  onTareaGuardada() {
+    this.mostrarFormulario = false;
+    this.cargarTareas();
   }
 }

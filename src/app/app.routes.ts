@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
+import { roleGuard } from './core/guards/role.guard';
 
 
 export const routes: Routes = [
@@ -9,13 +10,13 @@ export const routes: Routes = [
   // Rutas protegidas por el Guard
   {
     path: 'features/muro-maestro',
-    canActivate: [authGuard], // <--- Candado puesto
+    canActivate: [authGuard, roleGuard], // <--- Candado puesto
     data: { role: 'maestro' }, // <--- Indicamos qué rol se necesita
     loadComponent: () => import('./features/muro-maestro/muro-maestro.component').then(m => m.MuroMaestroComponent)
   },
   {
     path: 'features/muro-alumno',
-    canActivate: [authGuard], // <--- Candado puesto
+    canActivate: [authGuard, roleGuard], // <--- Candado puesto
     data: { role: 'alumno' }, // <--- Indicamos qué rol se necesita
     loadComponent: () => import('./features/muro-alumno/muro-alumno.component').then(m => m.MuroAlumnoComponent)
   },

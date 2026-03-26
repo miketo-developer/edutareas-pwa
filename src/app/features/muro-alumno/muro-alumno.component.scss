@@ -63,3 +63,36 @@
   }
 }
 
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.task-card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.task-card h3 {
+  margin: 0 0 8px;
+}
+
+.task-card p {
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.task-footer {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 40px;
+  color: #777;
+}

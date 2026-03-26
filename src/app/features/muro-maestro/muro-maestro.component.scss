@@ -85,3 +85,38 @@
     p { font-size: 13px; color: #444; margin: 0; }
   }
 }
+
+.tasks-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.task-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.task-info p {
+  margin: 4px 0;
+  color: #555;
+}
+
+.task-actions button {
+  margin-left: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.2rem;
+}

@@ -20,7 +20,7 @@ export class AuthService {
    * @param password Contraseña
    * @param role 'maestro' | 'alumno'
    */
-  async register(email: string, password: string, role: 'maestro' | 'alumno', nombre: string) {
+  async register(email: string, password: string, role: 'maestro' | 'alumno', nombre: string, grupoId: string) {
     try {
       // 1. Crear usuario en Firebase Auth
       const credential = await createUserWithEmailAndPassword(this.auth, email, password);
@@ -33,6 +33,7 @@ export class AuthService {
         email,
         nombre,
         role,
+        grupoId,
         createdAt: new Date()
       });
 
