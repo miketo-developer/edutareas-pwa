@@ -26,6 +26,7 @@ export class MuroMaestroComponent implements OnInit {
   tareas: Tarea[] = [];
   mostrarFormulario = false;
   tareaSeleccionada?: Tarea; // Por si se va a editar una existente
+  gruposUnicos: string[] = [];
 
   nombreUsuario: string = 'Cargando...';
 
@@ -47,6 +48,10 @@ export class MuroMaestroComponent implements OnInit {
 
   async cargarTareas() {
     this.tareas = await this.taskService.getMyTasks();
+
+    // Extraemos los gruposID únicos de las tareas
+    const grupos = this.tareas.map(t => t.grupoId); // Asegúrate de que el nombre coincida con tu interfaz
+    this.gruposUnicos = [...new Set(grupos)]; // Elimina duplicados
   }
 
   logout() {

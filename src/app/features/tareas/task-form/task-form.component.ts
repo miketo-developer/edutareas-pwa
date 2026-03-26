@@ -21,10 +21,12 @@ export class TaskFormComponent {
 
   @Input() tarea?: Tarea; // para editar
   @Output() tareaGuardada = new EventEmitter<void>(); // Para refrescar
+  @Output() cerrarForm = new EventEmitter<void>();
 
   form = this.fb.nonNullable.group({
     titulo: ['', Validators.required],
     descripcion: ['', Validators.required],
+    materia: ['', Validators.required],
     fechaEntrega: ['', Validators.required],
     grupoId: ['', Validators.required]
   });
@@ -49,6 +51,7 @@ export class TaskFormComponent {
     const data = {
       titulo: formValue.titulo!,
       descripcion: formValue.descripcion!,
+      materia: formValue.materia!,
       fechaEntrega: new Date(formValue.fechaEntrega!),
       grupoId: formValue.grupoId!,
       docenteId: user.uid,
@@ -78,6 +81,11 @@ export class TaskFormComponent {
 
   private formatDate(date: Date): string {
     return new Date(date).toISOString().split('T')[0];
+  }
+
+  onCancelar() {
+    this.form.reset();
+    this.cerrarForm.emit();
   }
 
 }

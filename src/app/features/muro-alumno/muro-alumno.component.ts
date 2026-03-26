@@ -26,6 +26,12 @@ export class MuroAlumnoComponent implements OnInit {
 
   nombreUsuario: string = 'Alumno';
 
+  // Después de cargar las tareas, podemos agruparlas (opcional para el reporte)
+  get materiasPendientes() {
+    const materias = this.tareas.map(t => t.materia);
+    return [...new Set(materias)]; // Lista de materias únicas con tarea
+  }
+
   async ngOnInit() {
     const user = this.auth.currentUser;
 

@@ -1,3 +1,66 @@
+<div class="muro-container alumno">
+  <header class="navbar-student">
+    <div class="user-info">
+      <div class="avatar">🎓</div>
+      <div>
+        <h1>Mis Actividades</h1>
+        <p>Hola, {{ nombreUsuario }} • Grupo {{ grupoId }}</p>
+      </div>
+    </div>
+    <div class="icons">
+      <button class="btn-icon">🔔</button>
+      <button class="btn-icon" (click)="logout()">🚪</button>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="materias-summary" *ngIf="materiasPendientes.length > 0">
+      <p>Tienes tareas de:</p>
+      <div class="chips-container">
+        <span *ngFor="let materia of materiasPendientes" class="materia-chip">
+          {{ materia }}
+        </span>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h3>Tareas Pendientes</h3>
+      <span class="count-badge">{{ tareas.length }} activas</span>
+    </div>
+
+    <div *ngIf="tareas.length === 0" class="empty-state">
+      <div class="empty-icon">📂</div>
+      <h3>¡Todo al día!</h3>
+      <p>Tu maestro aún no ha publicado nuevas tareas para el grupo {{ grupoId }}.</p>
+    </div>
+
+    <div class="feed">
+      <div *ngFor="let tarea of tareas" class="task-card">
+        <div class="task-indicator"></div>
+        <div class="task-body">
+          <div class="task-main">
+            <div class="materia-tag">{{ tarea.materia }}</div> <h3>{{ tarea.titulo }}</h3>
+            <p>{{ tarea.descripcion }}</p>
+          </div>
+
+          <div class="task-footer">
+            <div class="due-date">
+              <span class="icon">📅</span>
+              <span>Entrega: <strong>{{ tarea.fechaEntrega | date:'mediumDate' }}</strong></span>
+            </div>
+            <button class="btn-action">Ver detalles</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--
 <div class="muro-container">
 
   <header class="navbar">
@@ -36,3 +99,4 @@
   </div>
 
 </div>
+-->

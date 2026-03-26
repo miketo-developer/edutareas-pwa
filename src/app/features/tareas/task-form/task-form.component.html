@@ -1,3 +1,61 @@
+<div class="modal-overlay" (click)="onCancelar()">
+  <div class="form-card" (click)="$event.stopPropagation()">
+
+    <header class="form-header">
+      <h2>{{ tarea ? 'Editar Actividad' : 'Nueva Actividad' }}</h2>
+      <button class="btn-close" (click)="onCancelar()">✕</button>
+    </header>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-body">
+        <div class="input-group">
+          <label>Título de la tarea</label>
+          <input type="text" formControlName="titulo" placeholder="Ej: Mapa conceptual de la célula" />
+        </div>
+
+        <div class="input-group">
+          <label>Instrucciones detalladas</label>
+          <textarea formControlName="descripcion" placeholder="Describe los puntos a evaluar..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label>Fecha de entrega</label>
+            <input type="date" formControlName="fechaEntrega" />
+          </div>
+
+          <div class="input-group">
+            <label>ID del Grupo</label>
+            <input type="text" formControlName="grupoId" placeholder="Ej: 3B" />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Asignatura / Materia</label>
+          <input type="text" formControlName="materia" placeholder="Ej: Matemáticas, Historia..." />
+        </div>
+      </div>
+
+
+
+      <footer class="form-actions">
+        <button type="button" class="btn-secondary" (click)="onCancelar()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="form.invalid">
+          {{ tarea ? 'Guardar Cambios' : 'Publicar Tarea' }}
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+<!--
 <div class="form-container">
   <div class="form-card">
 
@@ -34,3 +92,4 @@
     </form>
   </div>
 </div>
+-->
