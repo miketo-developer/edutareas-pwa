@@ -1,0 +1,49 @@
+<div class="admin-container">
+  <header class="admin-header">
+    <div class="brand">
+      <span class="logo">🛡️</span>
+      <h1>Panel de Control Root</h1>
+    </div>
+    <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
+  </header>
+
+  <main class="admin-content">
+    <section class="auth-box">
+      <h2>Autorizar Nuevo Docente</h2>
+      <p>Los correos agregados aquí podrán registrarse con el perfil de Maestro.</p>
+
+      <div class="form-inline">
+        <input type="email" [(ngModel)]="nuevoEmail" placeholder="correo@ejemplo.com">
+        <button (click)="agregarMaestro()" [disabled]="!nuevoEmail">Autorizar</button>
+      </div>
+    </section>
+
+    <section class="list-box">
+      <div class="list-header">
+        <h3>Docentes Autorizados</h3>
+        <span class="badge">Activos</span>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Correo Electrónico</th>
+              <th>Fecha de Alta</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let maestro of maestrosAutorizados$ | async">
+              <td>{{ maestro.email }}</td>
+              <td>{{ maestro.fechaAlta?.toDate() | date:'medium' }}</td>
+              <td>
+                <button class="btn-delete" (click)="eliminar(maestro.id)">Revocar Acceso</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>

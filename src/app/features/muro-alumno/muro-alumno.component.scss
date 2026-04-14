@@ -172,103 +172,21 @@ $shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
 
 
-/*
-.muro-container {
-  background-color: #f8f9fa;
-  min-height: 100vh;
-  padding-bottom: 20px;
 
-  .navbar {
-    background-color: var(--color-primary);
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.task-image-container {
+  margin: -20px -20px 15px -20px; // Esto hace que la imagen toque los bordes superiores de la tarjeta
+  height: 150px;
+  overflow: hidden;
+  cursor: pointer;
 
-    h1 { font-size: 1.2rem; margin: 0; }
-    .icons { display: flex; gap: 15px; font-size: 1.2rem; cursor: pointer; }
-  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
 
-  .hero-banner {
-    background: linear-gradient(135deg, #2e7d32, #4caf50); // Verde motivador
-    color: white;
-    padding: 30px 20px;
-    text-align: center;
-
-    h2 { margin: 0; font-size: 1.5rem; }
-    p { margin: 5px 0; opacity: 0.9; }
-  }
-
-  .content {
-    padding: 20px;
-    text-align: center;
-
-    .badge {
-      display: inline-block;
-      background: #e3f2fd;
-      color: var(--color-primary);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .main-illustration {
-      background: white;
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-
-      img { width: 100%; max-width: 250px; border-radius: 15px; }
-      h3 { color: #2e7d32; margin: 15px 0 5px; }
-      p { color: #555; font-size: 0.9rem; }
-    }
-
-    .advice-card {
-      margin-top: 20px;
-      background: #f1f8e9; // Verde muy claro
-      padding: 15px;
-      border-radius: 12px;
-      border: 1px solid #c8e6c9;
-      color: #33691e;
-      font-size: 0.85rem;
+    &:hover {
+      transform: scale(1.05);
     }
   }
 }
-
-.feed {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.task-card {
-  background: #ffffff;
-  padding: 16px;
-  border-radius: 14px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-}
-
-.task-card h3 {
-  margin: 0 0 8px;
-}
-
-.task-card p {
-  color: #555;
-  margin-bottom: 10px;
-}
-
-.task-footer {
-  font-size: 0.85rem;
-  color: #777;
-}
-
-.empty-state {
-  text-align: center;
-  margin-top: 40px;
-  color: #777;
-}
-*/

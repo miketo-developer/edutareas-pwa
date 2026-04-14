@@ -20,16 +20,16 @@ export const roleGuard: CanActivateFn = async (route, state) => {
   const expectedRole = route.data['role'];
 
   // 3. Consultamos Firestore para verificar el rol real
-  const userDoc = await getDoc(doc(firestore, `users/${user.uid}`));
-  const userData = userDoc.data();
+  const userDocRef = doc(firestore, `users/${user.uid}`);
+  const userDocSnap = await getDoc(userDocRef);
 
-  if (userData && userData['role'] === expectedRole) {
-    return true; // El rol coincide, acceso concedido
+  if (userDocSnap.exists() && userDocSnap.data()['role'] === expectedRole) {
+    return true;  // El rol coincide, acceso concedido
   } else {
+    const role = userDocSnap.exists() ? userDocSnap.data()['role'] : 'alumno';
     // Si es alumno y quiere entrar a maestro (o viceversa), lo mandamos a su muro correcto
-    const target = userData?.['role'] === 'maestro' ? '/features/muro-maestro' : '/features/muro-alumno';
+    const target = role === 'maestro' ? '/features/muro-maestro' : '/features/muro-alumno';
     router.navigate([target]);
     return false;
   }
 };
-

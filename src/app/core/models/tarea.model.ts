@@ -7,4 +7,5 @@ export interface Tarea {
   grupoId: string;
   docenteId: string;
   createdAt: Date;
+  imagenUrl?: string;
 }

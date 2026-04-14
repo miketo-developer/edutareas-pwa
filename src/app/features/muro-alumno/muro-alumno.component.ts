@@ -26,6 +26,13 @@ export class MuroAlumnoComponent implements OnInit {
 
   nombreUsuario: string = 'Alumno';
 
+  // Para abrir la imagen en una pestaña nueva al hacer clic
+  verImagenFull(url: string) {
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
+
   // Después de cargar las tareas, podemos agruparlas (opcional para el reporte)
   get materiasPendientes() {
     const materias = this.tareas.map(t => t.materia);

@@ -14,12 +14,28 @@ export class TaskService {
 
   private tareasCollection = collection(this.firestore, 'tareas');
 
-  // 🔹 Crear tarea
+  // MOCK: Simulación de subida a Firebase Storage
+  // Con el plan Blaze, aquí usaremos la librería 'firebase/storage'
+  async uploadImageMock(file: File): Promise<string> {
+    return new Promise((resolve) => {
+      // Simulamos un retraso de red de 1.5 segundos
+      setTimeout(() => {
+        const reader = new FileReader();  //Al tener la NUEVA CUENTA de Firestore, en lugar de usar FileReader, usaremos uploadBytes y getDownloadURL de Firebase Storage
+        reader.onload = (e: any) => {
+          // Devolvemos el Base64 como si fuera la URL de descarga de Firebase
+          resolve(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }, 1500);
+    });
+  }
+
+  // Crear tarea
   async createTask(tarea: Omit<Tarea, 'id'>) {
     return await addDoc(this.tareasCollection, tarea);
   }
 
-  // 🔹 Obtener tareas del maestro actual
+  // Obtener tareas del maestro actual
   async getMyTasks() {
     const user = this.auth.currentUser;
     if (!user) return [];
@@ -38,13 +54,13 @@ export class TaskService {
     }) as Tarea[];
   }
 
-  // 🔹 Actualizar tarea
+  // Actualizar tarea
   async updateTask(id: string, data: Partial<Tarea>) {
     const ref = doc(this.firestore, `tareas/${id}`);
     return await updateDoc(ref, data);
   }
 
-  // 🔹 Eliminar tarea
+  // Eliminar tarea
   async deleteTask(id: string) {
     const ref = doc(this.firestore, `tareas/${id}`);
     return await deleteDoc(ref);
@@ -65,3 +81,4 @@ export class TaskService {
     }) as Tarea[];
   }
 }
+

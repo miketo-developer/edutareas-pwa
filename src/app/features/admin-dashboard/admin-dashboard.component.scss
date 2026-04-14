@@ -1,0 +1,136 @@
+$admin-dark: #1e293b;
+$admin-accent: #3b82f6;
+$danger: #ef4444;
+
+.admin-container {
+  background: #f1f5f9;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+
+  .admin-header {
+    background: $admin-dark;
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      h1 { font-size: 20px; margin: 0; font-weight: 600; }
+      .logo { font-size: 24px; }
+    }
+
+    .btn-logout {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      &:hover { background: rgba(255,255,255,0.2); }
+    }
+  }
+
+  .admin-content {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .auth-box {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+
+    h2 { font-size: 18px; margin-top: 0; color: $admin-dark; }
+    p { color: #64748b; font-size: 14px; margin-bottom: 20px; }
+
+    .form-inline {
+      display: flex;
+      gap: 10px;
+      input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 15px;
+        &:focus { outline: none; border-color: $admin-accent; }
+      }
+      button {
+        background: $admin-accent;
+        color: white;
+        border: none;
+        padding: 0 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        &:disabled { opacity: 0.5; cursor: not-allowed; }
+      }
+    }
+  }
+
+  .list-box {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    overflow: hidden;
+
+    .list-header {
+      padding: 20px 30px;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      h3 { font-size: 16px; margin: 0; color: $admin-dark; }
+      .badge {
+        background: #dcfce7;
+        color: #166534;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 20px;
+        text-transform: uppercase;
+      }
+    }
+
+    .table-container {
+      overflow-x: auto;
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        th {
+          background: #f8fafc;
+          text-align: left;
+          padding: 15px 30px;
+          font-size: 13px;
+          color: #64748b;
+          text-transform: uppercase;
+        }
+        td {
+          padding: 15px 30px;
+          border-bottom: 1px solid #f1f5f9;
+          font-size: 14px;
+          color: #334155;
+        }
+        .btn-delete {
+          background: none;
+          border: 1px solid #fee2e2;
+          color: $danger;
+          padding: 6px 12px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 12px;
+          &:hover { background: #fef2f2; }
+        }
+      }
+    }
+  }
+}

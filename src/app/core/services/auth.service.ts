@@ -21,24 +21,46 @@ export class AuthService {
    * @param role 'maestro' | 'alumno'
    */
   async register(email: string, password: string, role: 'maestro' | 'alumno', nombre: string, grupoId: string) {
+    // 0. Normalización: Evita errores por mayúsculas o espacios accidentales
+    const emailRef = email.toLowerCase().trim();
+
     try {
-      // 1. Crear usuario en Firebase Auth
+      // 1. VALIDACIÓN DE LISTA BLANCA (Antes de crear la cuenta en Auth)
+      if (role === 'maestro') {
+        const docRef = doc(this.firestore, `whitelist_docentes/${emailRef}`);
+        const docSnap = await getDoc(docRef);
+
+        // Si el documento no existe, detenemos todo antes de crear el usuario en Auth
+        if (!docSnap.exists()) {
+          throw new Error('Este correo no está autorizado por la Dirección. Consulta al administrador.');
+        }
+      }
+
+      // 2. CREACIÓN EN FIREBASE AUTH
+      // Hasta que esta línea se ejecute con éxito, el usuario NO está autenticado
       const credential = await createUserWithEmailAndPassword(this.auth, email, password);
       const uid = credential.user.uid;
 
-      // 2. Guardar el perfil con el ROL en Firestore
+      // 3. PERSISTENCIA DEL PERFIL EN FIRESTORE
+      // Es correcto guardar más datos aquí (nombre, grupo, etc) que no están en la lista blanca
       const userDoc = doc(this.firestore, `users/${uid}`);
+
       await setDoc(userDoc, {
         uid,
-        email,
-        nombre,
-        role,
-        grupoId,
+        email: emailRef,
+        nombre: nombre.trim(),
+        role: role,
+        // Tip: Si es maestro, podrías guardar el grupoId como opcional o vacío
+        grupoId: role === 'maestro' ? 'DOCENTE_GENERAL' : grupoId,
         createdAt: new Date()
       });
 
       return credential;
-    } catch (error) {
+    } catch (error: any) {
+      // Manejo de errores de Firebase para mensajes más claros
+      if (error.code === 'auth/email-already-in-use') {
+        throw new Error('Este correo ya está registrado en la plataforma.');
+      }
       throw error;
     }
   }
@@ -57,6 +79,8 @@ export class AuthService {
 
       if (userData?.['role'] === 'maestro') {
         this.router.navigate(['/features/muro-maestro']);
+      }  else if (userData?.['role'] === 'admin') {
+        this.router.navigate(['/features/admin-dashboard']);
       } else {
         this.router.navigate(['/features/muro-alumno']);
       }

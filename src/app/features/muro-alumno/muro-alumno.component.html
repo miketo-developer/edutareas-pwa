@@ -37,9 +37,16 @@
     <div class="feed">
       <div *ngFor="let tarea of tareas" class="task-card">
         <div class="task-indicator"></div>
+
         <div class="task-body">
+
+          <div class="task-image-container" *ngIf="tarea.imagenUrl">
+            <img [src]="tarea.imagenUrl" alt="Recurso de la tarea" (click)="verImagenFull(tarea.imagenUrl)">
+          </div>
+
           <div class="task-main">
-            <div class="materia-tag">{{ tarea.materia }}</div> <h3>{{ tarea.titulo }}</h3>
+            <div class="materia-tag">{{ tarea.materia }}</div>
+            <h3>{{ tarea.titulo }}</h3>
             <p>{{ tarea.descripcion }}</p>
           </div>
 
@@ -52,51 +59,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-<!--
-<div class="muro-container">
-
-  <header class="navbar">
-    <h1>Mis Tareas</h1>
-    <div class="icons">
-      <span>🔔</span>
-      <span (click)="logout()" style="cursor:pointer">👤</span>
-    </div>
-  </header>
-
-  <div class="content">
-
-    <span class="badge">{{ grupoId }}</span>
-
-    <div *ngIf="tareas.length === 0" class="empty-state">
-      <h3>No hay tareas aún 📭</h3>
-      <p>Tu maestro aún no ha publicado tareas.</p>
-    </div>
-
-    <div class="feed">
-
-      <div *ngFor="let tarea of tareas" class="task-card">
-
-        <h3>{{ tarea.titulo }}</h3>
-
-        <p>{{ tarea.descripcion }}</p>
-
-        <div class="task-footer">
-          <span>📅 {{ tarea.fechaEntrega | date }}</span>
-        </div>
-
       </div>
-
-    </div>
-
   </div>
-
 </div>
--->
+

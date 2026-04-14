@@ -7,6 +7,14 @@ export const routes: Routes = [
   { path: 'login', loadComponent: () => import('./features/login/login.component').then(m => m.LoginComponent) },
   { path: 'register', loadComponent: () => import('./features/register/register.component').then(m => m.RegisterComponent) },
 
+  // --- RUTA DEL ADMINISTRADOR ---
+  {
+    path: 'features/admin-dashboard',
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'admin' }, // <--- Solo el Director/Root entra aquí
+    loadComponent: () => import('./features/admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent)
+  },
+
   // Rutas protegidas por el Guard
   {
     path: 'features/muro-maestro',
@@ -23,7 +31,3 @@ export const routes: Routes = [
 
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
-
-
-
-

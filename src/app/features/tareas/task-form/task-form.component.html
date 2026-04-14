@@ -34,7 +34,32 @@
           <label>Asignatura / Materia</label>
           <input type="text" formControlName="materia" placeholder="Ej: Matemáticas, Historia..." />
         </div>
+
+
+
+      <!-- Sección para el manejo de la imagen -->
+      <div class="input-group">
+        <label>Imagen adjunta (Opcional)</label>
+
+        <div class="upload-zone" *ngIf="!imagenPreview">
+            <input type="file" id="fileInput" accept="image/*" (change)="onFileSelected($event)" hidden>
+            <label for="fileInput" class="upload-btn">
+              <span>📷 Subir imagen ilustrativa</span>
+              <small>JPG, PNG, GIF (Máx. 2MB)</small>
+            </label>
+          </div>
+
+          <div class="preview-zone" *ngIf="imagenPreview">
+            <img [src]="imagenPreview" alt="Previsualización de tarea">
+            <button type="button" class="btn-remove" (click)="removerImagen()">✕ Quitar imagen</button>
+          </div>
+        </div>
+
+
       </div>
+
+
+
 
 
 
@@ -49,47 +74,3 @@
     </form>
   </div>
 </div>
-
-
-
-
-
-
-<!--
-<div class="form-container">
-  <div class="form-card">
-
-    <h2 class="form-title">
-      {{ tarea ? 'Editar Tarea' : 'Nueva Tarea' }}
-    </h2>
-
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-      <div class="form-group">
-        <label>Título</label>
-        <input type="text" formControlName="titulo" />
-      </div>
-
-      <div class="form-group">
-        <label>Descripción</label>
-        <textarea formControlName="descripcion"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Fecha de entrega</label>
-        <input type="date" formControlName="fechaEntrega" />
-      </div>
-
-      <div class="form-group">
-        <label>Grupo</label>
-        <input type="text" formControlName="grupoId" placeholder="Ej: 3A" />
-      </div>
-
-      <button type="submit" [disabled]="form.invalid">
-        {{ tarea ? 'Actualizar Tarea' : 'Crear Tarea' }}
-      </button>
-
-    </form>
-  </div>
-</div>
--->
