@@ -1,0 +1,53 @@
+<div class="modal-overlay" (click)="cerrar.emit()">
+  <div class="detail-card" (click)="$event.stopPropagation()">
+
+    <header class="detail-header">
+      <span class="badge-status" [ngClass]="estado.class">{{ estado.label }}</span>
+      <button class="btn-close" (click)="cerrar.emit()">✕</button>
+    </header>
+
+    <div class="detail-body">
+      <div class="image-container" *ngIf="tarea.imagenUrl">
+        <img [src]="tarea.imagenUrl" alt="Recurso de tarea">
+      </div>
+
+      <div class="main-info">
+        <small class="materia">{{ tarea.materia }}</small>
+        <h2>{{ tarea.titulo }}</h2>
+        <p class="due-date">📅 Entrega: {{ tarea.fechaEntrega | date:'fullDate' }}</p>
+
+        <div class="description">
+          <label>Instrucciones:</label>
+          <p>{{ tarea.descripcion }}</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="personal-section">
+        <h3>Mi Progreso</h3>
+
+        <div class="check-group">
+          <input type="checkbox" id="checkDone" [(ngModel)]="completadaTemp">
+          <label for="checkDone">Marcar como realizada</label>
+        </div>
+
+        <div class="note-group">
+          <label>Notas personales (Privado):</label>
+          <textarea
+            [(ngModel)]="notaTemp"
+            placeholder="Escribe recordatorios o dudas aquí..."
+            maxlength="200">
+          </textarea>
+        </div>
+      </div>
+    </div>
+
+    <footer class="detail-actions">
+      <button class="btn-cancel" (click)="cerrar.emit()">Cancelar</button>
+      <button class="btn-save" (click)="guardarCambios()" [disabled]="isSaving">
+        {{ isSaving ? 'Guardando...' : 'Actualizar Estado' }}
+      </button>
+    </footer>
+  </div>
+</div>

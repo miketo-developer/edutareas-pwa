@@ -18,54 +18,41 @@
       <span class="label">Tareas Creadas</span>
     </div>
     <div class="stat-card">
-      <span class="value">{{ gruposUnicos.length }}</span>
+      <span class="value">{{ gruposDisponibles.length }}</span>
       <span class="label">Grupos Activos</span>
     </div>
   </section>
 
   <div class="content">
     <div class="section-header">
-      <h3>Tareas Publicadas</h3>
+      <h3>Gestión de Actividades</h3>
       <button class="btn-add" (click)="abrirFormulario()">+ Crear Tarea</button>
     </div>
 
     <div class="feed">
-      <div *ngIf="tareas.length === 0" class="empty-state">
+      <div *ngIf="gruposDisponibles.length === 0" class="empty-state">
         <p>Aún no has publicado ninguna tarea.</p>
       </div>
 
-      <div *ngFor="let tarea of tareas" class="task-card">
-
-        <div class="task-thumbnail" *ngIf="tarea.imagenUrl">
-          <img [src]="tarea.imagenUrl" alt="Imagen de la tarea">
+      <div *ngFor="let grupo of gruposDisponibles" class="grupo-section">
+        <div class="grupo-header">
+          <h4>Grupo: {{ grupo }}</h4>
+          <span class="badge-count">{{ tareasPorGrupo[grupo].length }} actividades</span>
         </div>
 
-        <div class="task-content">
-          <h4>{{ tarea.titulo }}</h4>
-          <p>{{ tarea.descripcion }}</p>
-          <div class="task-meta">
-            <span class="badge materia">{{ tarea.materia }}</span>
-            <span class="badge grupo">👥 {{ tarea.grupoId }}</span>
-            <small>📅 {{ tarea.fechaEntrega | date:'shortDate' }}</small>
+        <div class="grupo-grid">
+          <div *ngFor="let tarea of tareasPorGrupo[grupo]" class="task-card-mini">
+            <div class="card-main" (click)="abrirVistaPrevia(tarea)">
+              <span class="materia-tag">{{ tarea.materia }}</span>
+              <h5>{{ tarea.titulo }}</h5>
+              <small>📅 {{ tarea.fechaEntrega | date:'shortDate' }}</small>
+            </div>
+
+            <div class="card-actions">
+              <button (click)="editarTarea(tarea)" class="btn-edit" title="Editar">✏️</button>
+              <button (click)="eliminarTarea(tarea.id!)" class="btn-delete" title="Eliminar">🗑️</button>
+            </div>
           </div>
-        </div>
-
-        <div class="task-actions">
-          <button (click)="editarTarea(tarea)" title="Editar">✏️</button>
-          <button (click)="eliminarTarea(tarea.id!)" title="Eliminar">🗑️</button>
-        </div>
-      </div>
-      </div>
-
-    <div class="groups-section" *ngIf="gruposUnicos.length > 0">
-      <h3>Resumen por Grupos</h3>
-      <div class="groups-list">
-        <div *ngFor="let grupo of gruposUnicos" class="group-item card">
-          <div class="group-info">
-            <h4>Grupo: {{ grupo }}</h4>
-            <p>Gestionando tareas para este grupo</p>
-          </div>
-          <span class="arrow">→</span>
         </div>
       </div>
     </div>
@@ -77,4 +64,11 @@
     (tareaGuardada)="onTareaGuardada()"
     (cerrarForm)="mostrarFormulario = false">
   </app-task-form>
+
+  <app-task-detail
+    *ngIf="tareaSeleccionada && !mostrarFormulario"
+    [tarea]="tareaSeleccionada"
+    [seguimiento]="{ completada: false, notaPersonal: 'Vista previa de docente' }"
+    (cerrar)="tareaSeleccionada = null">
+  </app-task-detail>
 </div>

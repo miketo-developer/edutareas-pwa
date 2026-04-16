@@ -1,3 +1,44 @@
+.navbar-student {
+  /* SOLUCIÓN AL PROBLEMA DE VISIBILIDAD: Sticky Header */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* En PC respetamos los bordes redondeados del contenedor si existen */
+  @media (min-width: 768px) {
+    border-radius: 24px 24px 0 0;
+  }
+}
+
+.content {
+  padding: 20px;
+  /* El contenido ahora hace scroll detrás del navbar */
+}
+
+/* --- Ajuste para Computadoras (Grids) --- */
+.feed {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr; /* Dos columnas de tareas en PC */
+  }
+}
+
+.task-card {
+  height: 100%; /* Para que en el grid todas midan igual */
+}
+
+
+
+
+
 $primary: #4f46e5;
 $primary-light: #eef2ff;
 $success: #10b981;
@@ -189,4 +230,26 @@ $shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       transform: scale(1.05);
     }
   }
+}
+
+.task-card.is-completed {
+  opacity: 0.7;
+  background-color: #f1f5f9;
+  border-left-color: #94a3b8 !important; // Un color neutro (gris)
+
+  h3 {
+    text-decoration: line-through;
+    color: #64748b;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }

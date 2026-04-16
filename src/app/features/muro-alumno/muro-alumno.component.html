@@ -8,8 +8,8 @@
       </div>
     </div>
     <div class="icons">
-      <button class="btn-icon">🔔</button>
-      <button class="btn-icon" (click)="logout()">🚪</button>
+      <button class="btn-icon" aria-label="Notificaciones">🔔</button>
+      <button class="btn-icon" (click)="logout()" aria-label="Cerrar sesión">🚪</button>
     </div>
   </header>
 
@@ -23,43 +23,88 @@
       </div>
     </div>
 
-    <div class="section-header">
-      <h3>Tareas Pendientes</h3>
-      <span class="count-badge">{{ tareas.length }} activas</span>
+    <div class="filter-bar">
+      <button class="filter-btn" [class.active]="filtroActual === 'todas'" (click)="cambiarFiltro('todas')">
+        Todas
+      </button>
+      <button class="filter-btn" [class.active]="filtroActual === 'pendientes'" (click)="cambiarFiltro('pendientes')">
+        Pendientes
+      </button>
+      <button class="filter-btn" [class.active]="filtroActual === 'completadas'" (click)="cambiarFiltro('completadas')">
+        Listas
+      </button>
     </div>
 
-    <div *ngIf="tareas.length === 0" class="empty-state">
+    <div class="section-header">
+      <h3>{{ tituloFeed }}</h3>
+      <span class="count-badge">{{ tareasFiltradas.length }} activas</span>
+    </div>
+
+    <div *ngIf="tareasFiltradas.length === 0" class="empty-state">
       <div class="empty-icon">📂</div>
-      <h3>¡Todo al día!</h3>
-      <p>Tu maestro aún no ha publicado nuevas tareas para el grupo {{ grupoId }}.</p>
+      <h3>¡No hay tareas aquí!</h3>
+      <p>No se encontraron actividades en la categoría "{{ filtroActual }}".</p>
     </div>
 
     <div class="feed">
-      <div *ngFor="let tarea of tareas" class="task-card">
+      <div *ngFor="let tarea of tareasFiltradas"
+           class="task-card"
+           [ngClass]="{
+             'status-vencida': obtenerEstado(tarea.fechaEntrega) === 'vencida',
+             'status-proxima': obtenerEstado(tarea.fechaEntrega) === 'proxima',
+             'status-activa': obtenerEstado(tarea.fechaEntrega) === 'activa',
+             'is-completed': seguimientoMap[tarea.id!]?.completada
+           }">
+
         <div class="task-indicator"></div>
 
         <div class="task-body">
-
-          <div class="task-image-container" *ngIf="tarea.imagenUrl">
-            <img [src]="tarea.imagenUrl" alt="Recurso de la tarea" (click)="verImagenFull(tarea.imagenUrl)">
+          <div class="task-image-container" *ngIf="tarea.imagenUrl" (click)="verImagenFull(tarea.imagenUrl)">
+            <img [src]="tarea.imagenUrl" alt="Recurso multimedia de la tarea">
           </div>
 
           <div class="task-main">
             <div class="materia-tag">{{ tarea.materia }}</div>
-            <h3>{{ tarea.titulo }}</h3>
-            <p>{{ tarea.descripcion }}</p>
+            <div class="title-row">
+              <h3>{{ tarea.titulo }}</h3>
+              <div class="check-container">
+                <input type="checkbox"
+                       [id]="'check-' + tarea.id"
+                       [checked]="seguimientoMap[tarea.id!]?.completada"
+                       (change)="toggleCompletada(tarea.id!, $event)">
+                <label [for]="'check-' + tarea.id" class="sr-only">Marcar como completada</label>
+              </div>
+            </div>
+            <p class="truncate">{{ tarea.descripcion }}</p>
           </div>
 
           <div class="task-footer">
             <div class="due-date">
-              <span class="icon">📅</span>
+              <span class="icon" aria-hidden="true">📅</span>
               <span>Entrega: <strong>{{ tarea.fechaEntrega | date:'mediumDate' }}</strong></span>
             </div>
-            <button class="btn-action">Ver detalles</button>
+
+            <div class="footer-actions">
+              <span class="badge-status" [ngClass]="obtenerEstado(tarea.fechaEntrega)">
+                {{ obtenerEstado(tarea.fechaEntrega) }}
+              </span>
+              <button class="btn-action"
+                      (click)="abrirDetalle(tarea)"
+                      [attr.aria-label]="'Ver detalles de ' + tarea.titulo">
+                Ver detalles
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      </div>
+    </div>
   </div>
-</div>
 
+  <app-task-detail
+    *ngIf="tareaSeleccionada"
+    [tarea]="tareaSeleccionada"
+    [seguimiento]="seguimientoMap[tareaSeleccionada.id!]"
+    (cerrar)="tareaSeleccionada = null"
+    (actualizado)="onActualizado()">
+  </app-task-detail>
+</div>

@@ -1,251 +1,204 @@
-// Definición de variables locales para fácil mantenimiento
-$primary: #4f46e5; // Un azul índigo más moderno
+// --- Variables de Diseño ---
+$primary: #4f46e5;
+$primary-dark: #3730a3;
 $primary-light: #eef2ff;
+$text-main: #1e293b;
+$text-muted: #64748b;
 $danger: #ef4444;
-$text-main: #1f2937;
-$text-muted: #6b7280;
-$shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
 .muro-container.maestro {
-  background-color: #f9fafb;
+  background-color: #f8fafc;
   min-height: 100vh;
-  font-family: 'Inter', system-ui, sans-serif;
-  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
 
+  // --- Header / Toolbar Sticky ---
   .navbar-teacher {
-    background: linear-gradient(135deg, $primary 0%, #3730a3 100%);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
     color: white;
-    padding: 30px 20px 60px; // Más espacio abajo para el efecto de elevación
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 0 0 30px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+    @media (min-width: 768px) {
+      border-radius: 24px 24px 0 0;
+    }
 
     .user-info {
       display: flex;
-      gap: 15px;
       align-items: center;
+      gap: 12px;
 
       .avatar {
-        font-size: 28px;
+        width: 45px;
+        height: 45px;
         background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        width: 50px;
-        height: 50px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 16px;
+        font-size: 24px;
         border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
-      h1 { font-size: 20px; font-weight: 700; margin: 0; letter-spacing: -0.5px; }
-      p { font-size: 13px; margin: 0; opacity: 0.9; font-weight: 400; }
+      div {
+        h1 { font-size: 18px; margin: 0; font-weight: 700; }
+        p { font-size: 13px; margin: 0; opacity: 0.9; }
+      }
     }
 
-    .btn-icon {
-      background: rgba(255, 255, 255, 0.15);
-      border: none;
-      color: white;
-      padding: 10px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      &:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+    .icons {
+      .btn-icon {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.2s;
+        &:hover { background: rgba(255, 255, 255, 0.2); }
+      }
     }
   }
 
+  // --- Estadísticas ---
   .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
     padding: 0 20px;
-    margin-top: -30px; // Elevación sobre el navbar mejorada
+    margin-top: -20px; // Efecto de elevación
 
     .stat-card {
       background: white;
       padding: 20px;
       border-radius: 20px;
-      box-shadow: $shadow;
-      border: 1px solid rgba(0,0,0,0.03);
-      transition: transform 0.2s;
-
-      &:hover { transform: translateY(-4px); }
-
-      .value { display: block; font-size: 28px; font-weight: 800; color: $primary; line-height: 1; }
-      .label { font-size: 12px; color: $text-muted; font-weight: 600; text-transform: uppercase; margin-top: 8px; display: block; }
-
-      &.alert .value { color: $danger; }
+      box-shadow: $shadow-md;
+      text-align: center;
+      .value { display: block; font-size: 26px; font-weight: 800; color: $primary; }
+      .label { font-size: 11px; color: $text-muted; text-transform: uppercase; font-weight: 600; }
     }
   }
 
   .content {
-    padding: 24px 20px;
+    padding: 20px;
+    flex: 1;
 
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 20px 0 16px;
-
-      h3 { font-size: 18px; font-weight: 700; color: $text-main; margin: 0; }
-
+      margin: 30px 0 20px;
+      h3 { font-size: 18px; font-weight: 700; color: $text-main; }
       .btn-add {
         background: $primary;
         color: white;
         border: none;
-        padding: 10px 20px;
-        border-radius: 14px;
+        padding: 10px 18px;
+        border-radius: 12px;
         font-weight: 600;
-        font-size: 14px;
-        box-shadow: 0 4px 14px rgba($primary, 0.4);
         cursor: pointer;
-        transition: all 0.2s;
-        &:hover { transform: scale(1.05); filter: brightness(1.1); }
+        transition: transform 0.2s;
+        &:hover { transform: scale(1.05); }
       }
     }
 
-    // Listado de Tareas (Feed)
-    .feed {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 30px;
-    }
+    // --- Secciones por Grupo ---
+    .grupo-section {
+      margin-bottom: 32px;
 
-    .task-card {
-      background: white;
-      padding: 20px;
-      border-radius: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-      border: 1px solid #f3f4f6;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-      &:hover {
-        box-shadow: $shadow;
-        border-color: rgba($primary, 0.2);
-      }
-
-      .task-content {
-        h4 { margin: 0; font-size: 16px; color: $text-main; font-weight: 600; }
-        p { margin: 6px 0; font-size: 14px; color: $text-muted; line-height: 1.4; }
-
-        .task-meta {
-          display: flex;
-          gap: 12px;
-          align-items: center;
-          margin-top: 10px;
-
-          small { color: $text-muted; font-weight: 500; }
-          .badge {
-            background: $primary-light;
-            color: $primary;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-          }
-        }
-      }
-
-      .task-actions {
-        display: flex;
-        gap: 8px;
-        button {
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
-          border: none;
-          background: #f9fafb;
-          cursor: pointer;
-          transition: all 0.2s;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 16px;
-
-          &:hover { background: #f3f4f6; transform: scale(1.1); }
-          &.btn-delete:hover { background: #fee2e2; color: $danger; }
-        }
-      }
-    }
-
-    // Listado de Grupos
-    .groups-list {
-      .group-item.card {
-        background: white;
-        padding: 16px 20px;
-        border-radius: 16px;
-        margin-bottom: 12px;
+      .grupo-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border: 1px solid #f3f4f6;
-        cursor: pointer;
-        transition: all 0.2s;
-
-        &:hover { background: #fafafa; border-color: $primary; }
-
-        .group-info {
-          h4 { margin: 0; font-size: 15px; font-weight: 600; color: $text-main; }
-          p { margin: 4px 0 0; font-size: 13px; color: $text-muted; }
+        padding-bottom: 8px;
+        border-bottom: 2px solid #e2e8f0;
+        margin-bottom: 16px;
+        h4 { color: $text-main; font-size: 16px; font-weight: 700; }
+        .badge-count {
+          font-size: 12px;
+          background: #e2e8f0;
+          color: $text-muted;
+          padding: 2px 10px;
+          border-radius: 20px;
         }
-        .arrow { color: $primary; font-size: 18px; }
       }
     }
-  }
 
-  .teacher-tip {
-    background: #fff;
-    padding: 20px;
-    border-radius: 18px;
-    margin: 30px 20px 0;
-    border: 1px solid $primary-light;
-    box-shadow: inset 4px 0 0 $primary; // Borde lateral elegante
+    // --- Cuadrícula de Tareas (Móvil, Tablet, PC) ---
+    .grupo-grid {
+      display: grid;
+      grid-template-columns: 1fr; // Móvil: 1 columna
+      gap: 16px;
 
-    p { font-size: 13px; color: $text-main; margin: 0; line-height: 1.5; }
-    strong { color: $primary; font-weight: 700; }
-  }
-}
+      @media (min-width: 600px) {
+        grid-template-columns: 1fr 1fr; // Tablet: 2 columnas
+      }
 
-// Estilos para el componente modal (opcional si usas la técnica fixed)
-app-task-form {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  padding: 20px;
-}
+      @media (min-width: 1024px) {
+        grid-template-columns: 1fr 1fr 1fr; // PC: 3 columnas
+      }
+    }
 
+    // --- Tarjetas Mini ---
+    .task-card-mini {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: all 0.2s;
 
+      &:hover {
+        box-shadow: $shadow-md;
+        border-color: $primary-light;
+      }
 
-.task-card {
-  display: flex; // Asegura que la imagen esté al lado del contenido
-  gap: 15px;
+      .card-main {
+        cursor: pointer;
+        .materia-tag {
+          font-size: 10px;
+          font-weight: 800;
+          color: $primary;
+          text-transform: uppercase;
+          background: $primary-light;
+          padding: 2px 8px;
+          border-radius: 6px;
+          display: inline-block;
+          margin-bottom: 8px;
+        }
+        h5 { font-size: 15px; margin: 0 0 8px; color: $text-main; }
+        small { color: $text-muted; display: block; }
+      }
 
-  .task-thumbnail {
-    width: 80px;
-    height: 80px;
-    flex-shrink: 0; // Evita que la imagen se haga pequeña
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #e2e8f0;
+      .card-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #f1f5f9;
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+        button {
+          background: #f8fafc;
+          border: none;
+          padding: 8px;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background 0.2s;
+          &:hover { background: #f1f5f9; }
+          &.btn-delete:hover { background: #fee2e2; color: $danger; }
+        }
+      }
     }
   }
 }

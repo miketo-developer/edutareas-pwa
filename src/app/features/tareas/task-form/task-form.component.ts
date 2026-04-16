@@ -21,7 +21,7 @@ export class TaskFormComponent implements OnInit {
   archivoSeleccionado: File | null = null;
   imagenPreview: string | null = null;
 
-  @Input() tarea?: Tarea;
+  @Input() tarea: Tarea | null = null;
   @Output() tareaGuardada = new EventEmitter<void>();
   @Output() cerrarForm = new EventEmitter<void>();
 
