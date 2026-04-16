@@ -24,14 +24,23 @@
     </div>
 
     <div class="filter-bar">
-      <button class="filter-btn" [class.active]="filtroActual === 'todas'" (click)="cambiarFiltro('todas')">
-        Todas
+      <button
+        class="filter-chip"
+        [class.active]="filtroActual === 'todas'"
+        (click)="cambiarFiltro('todas')">
+        <span class="chip-icon">📋</span> Todas
       </button>
-      <button class="filter-btn" [class.active]="filtroActual === 'pendientes'" (click)="cambiarFiltro('pendientes')">
-        Pendientes
+      <button
+        class="filter-chip"
+        [class.active]="filtroActual === 'pendientes'"
+        (click)="cambiarFiltro('pendientes')">
+        <span class="chip-icon">⏳</span> Pendientes
       </button>
-      <button class="filter-btn" [class.active]="filtroActual === 'completadas'" (click)="cambiarFiltro('completadas')">
-        Listas
+      <button
+        class="filter-chip"
+        [class.active]="filtroActual === 'completadas'"
+        (click)="cambiarFiltro('completadas')">
+        <span class="chip-icon">✅</span> Listas
       </button>
     </div>
 

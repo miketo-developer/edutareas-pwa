@@ -20,6 +20,64 @@
   /* El contenido ahora hace scroll detrás del navbar */
 }
 
+
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin: 15px 0;
+  padding: 10px 20px; // Añadimos padding lateral para que los chips no toquen el borde al scrollear
+  margin-left: -20px;  // Compensamos el padding del contenedor padre (.content)
+  margin-right: -20px; // para que el scroll llegue hasta los bordes de la pantalla
+
+  overflow-x: auto;    // Habilita el scroll horizontal
+  scroll-snap-type: x mandatory; // Hace que el scroll "se imante" a cada chip
+  -webkit-overflow-scrolling: touch; // Scroll suave en iOS
+
+  scrollbar-width: none; // Oculta la barra en Firefox
+  &::-webkit-scrollbar { display: none; } // Oculta la barra en Chrome/Safari
+
+  .filter-chip {
+    flex-shrink: 0; // CRÍTICO: Evita que los chips se "aplasten" para intentar caber
+    scroll-snap-align: start; // Punto de anclaje para el imantado
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 50px;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    white-space: nowrap; // Evita que el texto de adentro haga salto de línea
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+
+    .chip-icon {
+      font-size: 16px;
+    }
+
+    &:hover {
+      background-color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+
+    // ESTADO SELECCIONADO (Activo)
+    &.active {
+      background-color: #4f46e5; // Color primario (Índigo)
+      color: #ffffff;
+      border-color: #4338ca;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+
+      .chip-icon {
+        filter: brightness(1.2);
+      }
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+
 /* --- Ajuste para Computadoras (Grids) --- */
 .feed {
   display: grid;
